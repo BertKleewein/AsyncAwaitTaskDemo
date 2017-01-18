@@ -49,11 +49,6 @@ namespace ConsoleApplication22
             Log("exiting Async_Task_That_Returns_Immediately_Without_Spawning_Any_Work");
         }
 
-        static async Task void_function_that_you_can_await()
-        {
-            await Task_That_Runs_On_Background_Thread();
-        }
-
         static Task Task_That_Runs_On_Background_Thread()
         {
             return Task.Run(() =>
@@ -71,15 +66,9 @@ namespace ConsoleApplication22
             Log("exiting Async_Task_That_Awaits_On_Background_Thread_Task");
         }
 
-        static async void Main(string[] args)
+        static void Main(string[] args)
         {
             MainThread = Thread.CurrentThread;
-
-            Log("Calling void_function_that_you_can_await.");
-            await void_function_that_you_can_await();
-            Rest(400);
-            Log("Done with void_function_that_you_can_await");
-            Console.ReadLine();
 
             Log("Calling Task_That_Returns_Immediately_Without_Spawning_Any_Work without waiting.  This will run sync on the foreground thread because it doesn't ever yeild the thread.");
             Task_That_Returns_Immediately_Without_Spawning_Any_Work();
